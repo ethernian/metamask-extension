@@ -34,6 +34,7 @@ const CONFIRM_SEND_TOKEN_PATH = '/send-token'
 const CONFIRM_DEPLOY_CONTRACT_PATH = '/deploy-contract'
 const CONFIRM_APPROVE_PATH = '/approve'
 const CONFIRM_TRANSFER_FROM_PATH = '/transfer-from'
+const CONFIRM_DAPPLET_PATH = '/confirm-dapplet'
 const CONFIRM_TOKEN_METHOD_PATH = '/token-method'
 const SIGNATURE_REQUEST_PATH = '/signature-request'
 
@@ -73,5 +74,6 @@ module.exports = {
   CONFIRM_APPROVE_PATH,
   CONFIRM_TRANSFER_FROM_PATH,
   CONFIRM_TOKEN_METHOD_PATH,
+  CONFIRM_DAPPLET_PATH,
   SIGNATURE_REQUEST_PATH,
 }

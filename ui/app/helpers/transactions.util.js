@@ -59,6 +59,10 @@ export function isConfirmDeployContract (txData = {}) {
   return !txParams.to
 }
 
+export function isDappletTransaction (txData = {}) {
+  return (txData.origin && txData.origin.name === 'dapplet');
+}
+
 /**
  * Returns four-byte method signature from data
  *
