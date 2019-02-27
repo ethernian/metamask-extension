@@ -40,6 +40,7 @@ export default class ConfirmPageContainer extends Component {
     identiconAddress: PropTypes.string,
     nonce: PropTypes.string,
     assetImage: PropTypes.string,
+    dappletComponent: PropTypes.node,
     summaryComponent: PropTypes.node,
     warning: PropTypes.string,
     unapprovedTxCount: PropTypes.number,
@@ -79,6 +80,7 @@ export default class ConfirmPageContainer extends Component {
       subtitle,
       subtitleComponent,
       hideSubtitle,
+      dappletComponent,
       summaryComponent,
       detailsComponent,
       dataComponent,
@@ -138,6 +140,7 @@ export default class ConfirmPageContainer extends Component {
               subtitle={subtitle}
               subtitleComponent={subtitleComponent}
               hideSubtitle={hideSubtitle}
+              dappletComponent={dappletComponent}
               summaryComponent={summaryComponent}
               detailsComponent={detailsComponent}
               dataComponent={dataComponent}

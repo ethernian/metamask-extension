@@ -18,6 +18,7 @@ export default class ConfirmPageContainerContent extends Component {
     assetImage: PropTypes.string,
     subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     subtitleComponent: PropTypes.node,
+    dappletComponent: PropTypes.node,
     summaryComponent: PropTypes.node,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     titleComponent: PropTypes.node,
@@ -25,9 +26,12 @@ export default class ConfirmPageContainerContent extends Component {
   }
 
   renderContent () {
-    const { detailsComponent, dataComponent } = this.props
+    const { dappletComponent, detailsComponent, dataComponent } = this.props
 
-    if (detailsComponent && dataComponent) {
+    if (dappletComponent && detailsComponent && dataComponent) {
+      return this.renderDappletTabs()
+    }
+    else if (detailsComponent && dataComponent) {
       return this.renderTabs()
     } else {
       return detailsComponent || dataComponent
@@ -36,9 +40,27 @@ export default class ConfirmPageContainerContent extends Component {
 
   renderTabs () {
     const { detailsComponent, dataComponent } = this.props
-
+    
     return (
       <Tabs>
+        <Tab name="Details">
+          { detailsComponent }
+        </Tab>
+        <Tab name="Data">
+          { dataComponent }
+        </Tab>
+      </Tabs>
+    )
+  }
+
+  renderDappletTabs () {
+    const { dappletComponent, detailsComponent, dataComponent } = this.props
+    
+    return (
+      <Tabs>
+        <Tab name="Dapplet">
+          { dappletComponent }
+        </Tab>
         <Tab name="Details">
           { detailsComponent }
         </Tab>

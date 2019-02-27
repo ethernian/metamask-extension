@@ -80,6 +80,7 @@ export default class ConfirmTransactionBase extends Component {
     subtitle: PropTypes.string,
     subtitleComponent: PropTypes.node,
     summaryComponent: PropTypes.node,
+    dappletComponent: PropTypes.node,
     title: PropTypes.string,
     titleComponent: PropTypes.node,
     valid: PropTypes.bool,
@@ -427,6 +428,7 @@ export default class ConfirmTransactionBase extends Component {
       hideSubtitle,
       identiconAddress,
       summaryComponent,
+      dappletComponent,
       contentComponent,
       onEdit,
       nonce,
@@ -455,6 +457,7 @@ export default class ConfirmTransactionBase extends Component {
         hideSubtitle={hideSubtitle}
         summaryComponent={summaryComponent}
         detailsComponent={this.renderDetails()}
+        dappletComponent={dappletComponent}
         dataComponent={this.renderData()}
         contentComponent={contentComponent}
         nonce={nonce}
