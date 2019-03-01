@@ -11,10 +11,10 @@ export default class ConfirmDeployContract extends Component {
 
   handleChange(event) {
     const { txData, update } = this.props;
-    
+
     if (event.target.type === 'checkbox') {
       txData.origin.context.params[event.target.name] = event.target.checked;
-      txData.txParams.data = txData.txParams.data.slice(0,-1).concat(event.target.checked ? '1' : '0')
+      txData.txParams.data = txData.txParams.data.slice(0, -1).concat(event.target.checked ? '1' : '0')
     }
 
     update(txData);
@@ -33,7 +33,7 @@ export default class ConfirmDeployContract extends Component {
     const { data, jsx, params } = this.props;
 
     return (
-      <div style={{ padding: '16px' }}>
+      <div>
         <JsxParser
           bindings={{
             handleChange: this.handleChange,
