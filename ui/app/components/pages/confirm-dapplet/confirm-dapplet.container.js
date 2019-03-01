@@ -1,60 +1,26 @@
 import { connect } from 'react-redux'
 import ConfirmWidget from './confirm-dapplet.component'
-import { getAdvancedInlineGasShown } from '../../../selectors'
-import { isBalanceSufficient, calcGasTotal } from '../../send/send.utils'
-import { getMetaMaskAccounts } from '../../../selectors'
+import { updateTransaction } from '../../../actions'
+
 
 const mapStateToProps = state => {
-    const { confirmTransaction, gas, metamask } = state
     const { confirmTransaction: { txData } = {} } = state
-    const { confirmTransaction: { txData: { origin: { context: { html } } } } = {} } = state
-    const { confirmTransaction: { txData: { origin: { context: { style } } } } = {} } = state
-    const { txParams = {} } = txData
-
-
-    const {
-        conversionRate,
-        selectedAddress
-    } = metamask
-    const accounts = getMetaMaskAccounts(state)
-    const { balance } = accounts[selectedAddress]
-
-    const {
-        gasPrice,
-        gas: gasLimit,
-        value: amount,
-    } = txParams
-
-    const {
-        hexTransactionFee,
-        hexTransactionTotal
-    } = confirmTransaction
-
-    const {
-        customGasLimit,
-        customGasPrice,
-    } = gas
-
-    const insufficientBalance = !isBalanceSufficient({
-        amount,
-        gasTotal: calcGasTotal(gasLimit, gasPrice),
-        balance,
-        conversionRate,
-    })
+    const { confirmTransaction: { txData: { origin: { context: { jsx, data, params } } } } = {} } = state
 
     return {
         txData,
-        html,
-        style,
-        hexTransactionFee,
-        hexTransactionTotal,
-        advancedInlineGasShown: getAdvancedInlineGasShown(state),
-        customGas: {
-            gasLimit: customGasLimit || gasLimit,
-            gasPrice: customGasPrice || gasPrice,
-        },
-        insufficientBalance
+        jsx,
+        data,
+        params
     }
 }
 
-export default connect(mapStateToProps)(ConfirmWidget)
+const mapDispatchToProps = dispatch => {
+    return {
+        update: editingTx => {
+            return dispatch(updateTransaction(editingTx))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmWidget)

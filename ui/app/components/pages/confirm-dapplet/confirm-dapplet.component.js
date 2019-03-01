@@ -1,24 +1,48 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ConfirmTransactionBase from '../confirm-transaction-base'
+import JsxParser from 'react-jsx-parser'
 
 export default class ConfirmDeployContract extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const { txData, update } = this.props;
+    
+    if (event.target.type === 'checkbox') {
+      txData.origin.context.params[event.target.name] = event.target.checked;
+      txData.txParams.data = txData.txParams.data.slice(0,-1).concat(event.target.checked ? '1' : '0')
+    }
+
+    update(txData);
+  }
+
   static contextTypes = {
-    t: PropTypes.func,
+    t: PropTypes.func
   }
 
   static propTypes = {
     txData: PropTypes.object,
+    update: PropTypes.func
   }
 
   renderDappletComponent() {
-    const { style, html } = this.props;
+    const { data, jsx, params } = this.props;
 
-    //TODO: may be it's well to use something like DOMPurify for XSS protection
     return (
       <div style={{ padding: '16px' }}>
-        <style type="text/css" dangerouslySetInnerHTML={{ __html: style }} />
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <JsxParser
+          bindings={{
+            handleChange: this.handleChange,
+            data,
+            params
+          }}
+          blacklistedAttrs={[]}
+          jsx={jsx}
+        />
       </div>
     )
   }
